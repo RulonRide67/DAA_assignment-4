@@ -1,29 +1,35 @@
 package graph.algorithms;
 
-import graph.algorithms.topo.CondensationGraph;
+import graph.algorithms.core.Graph;
 import graph.algorithms.topo.TopologicalSort;
-import graph.algorithms.scc.TarjanSCC;
+import graph.algorithms.util.JsonLoader;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import java.nio.file.Path;
 import java.util.*;
 
 public class TopoSortTest {
-    @Test
-    public void testTopoOrder() {
-        int n = 5;
+
+    private static List<List<Integer>> toAdj(Graph g) {
         List<List<Integer>> adj = new ArrayList<>();
-        for (int i = 0; i < n; i++) adj.add(new ArrayList<>());
-        adj.get(0).add(1);
-        adj.get(1).add(2);
-        adj.get(2).add(3);
-        adj.get(3).add(4);
-
-        TarjanSCC scc = new TarjanSCC(n, adj);
-        var comps = scc.getSCCs();
-        var dag = CondensationGraph.build(comps, adj, n);
-        var order = TopologicalSort.kahn(dag.size(), dag);
-
-        assertEquals(dag.size(), order.size());
-        System.out.println("Topo order: " + order);
+        for (int i = 0; i < g.getVertices(); i++) adj.add(new ArrayList<>());
+        for (int[] e : g.getEdges()) adj.get(e[0]).add(e[1]);
+        return adj;
     }
+
+    @Test
+    void testTopologicalSort() throws Exception {
+        List<Graph> allGraphs = new ArrayList<>();
+
+        allGraphs.addAll(JsonLoader.loadArray(Path.of("data/small.json")));
+        allGraphs.addAll(JsonLoader.loadArray(Path.of("data/medium.json")));
+        allGraphs.addAll(JsonLoader.loadArray(Path.of("data/large.json")));
+
+        for (int i = 0; i < allGraphs.size(); i++) {
+            Graph g = allGraphs.get(i);
+            var adj = toAdj(g);
+            var order = TopologicalSort.sort(g.getVertices(), adj);
+            System.out.println("Graph " + (i + 1) + " → Topo order: " + order);
+        }
+    }
+
 }

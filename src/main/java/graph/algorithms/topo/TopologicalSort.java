@@ -3,6 +3,7 @@ package graph.algorithms.topo;
 import java.util.*;
 
 public class TopologicalSort {
+
     public static List<Integer> kahn(int n, List<List<Integer>> adj) {
         int[] indeg = new int[n];
         for (int u = 0; u < n; u++) {
@@ -10,7 +11,9 @@ public class TopologicalSort {
         }
 
         Queue<Integer> q = new ArrayDeque<>();
-        for (int i = 0; i < n; i++) if (indeg[i] == 0) q.add(i);
+        for (int i = 0; i < n; i++) {
+            if (indeg[i] == 0) q.add(i);
+        }
 
         List<Integer> order = new ArrayList<>();
         while (!q.isEmpty()) {
@@ -22,5 +25,9 @@ public class TopologicalSort {
             }
         }
         return order;
+    }
+
+    public static List<Integer> sort(int n, List<List<Integer>> adj) {
+        return kahn(n, adj);
     }
 }

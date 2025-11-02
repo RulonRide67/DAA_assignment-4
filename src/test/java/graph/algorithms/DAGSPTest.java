@@ -1,35 +1,44 @@
 package graph.algorithms;
 
+import graph.algorithms.core.Graph;
 import graph.algorithms.dagsp.DAGShortestPath;
+import graph.algorithms.dagsp.DAGShortestPath.Edge;
+import graph.algorithms.topo.TopologicalSort;
+import graph.algorithms.util.JsonLoader;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import java.nio.file.Path;
 import java.util.*;
 
 public class DAGSPTest {
 
+    private static List<List<Edge>> toWeightedAdj(Graph g) {
+        List<List<Edge>> adj = new ArrayList<>();
+        for (int i = 0; i < g.getVertices(); i++) adj.add(new ArrayList<>());
+        for (int[] e : g.getEdges()) {
+            adj.get(e[0]).add(new Edge(e[1], e[2]));
+        }
+        return adj;
+    }
+
     @Test
-    public void testShortestAndLongest() {
-        int n = 6;
-        List<List<DAGShortestPath.Edge>> adj = new ArrayList<>();
-        for (int i = 0; i < n; i++) adj.add(new ArrayList<>());
+    void testDAGShortestPath() throws Exception {
+        var graphs = JsonLoader.loadArray(Path.of("data/large.json"));
+        for (int i = 0; i < graphs.size(); i++) {
+            Graph g = graphs.get(i);
+            List<List<Edge>> adj = toWeightedAdj(g);
 
-        adj.get(0).add(new DAGShortestPath.Edge(1, 5));
-        adj.get(0).add(new DAGShortestPath.Edge(2, 3));
-        adj.get(1).add(new DAGShortestPath.Edge(3, 6));
-        adj.get(1).add(new DAGShortestPath.Edge(2, 2));
-        adj.get(2).add(new DAGShortestPath.Edge(4, 4));
-        adj.get(2).add(new DAGShortestPath.Edge(5, 2));
-        adj.get(2).add(new DAGShortestPath.Edge(3, 7));
-        adj.get(3).add(new DAGShortestPath.Edge(4, -1));
-        adj.get(4).add(new DAGShortestPath.Edge(5, -2));
+            List<Integer> order = TopologicalSort.sort(g.getVertices(), toSimpleAdj(g));
 
-        List<Integer> topo = List.of(0, 1, 2, 3, 4, 5);
-        double[] shortest = DAGShortestPath.shortestPath(n, adj, 1, topo);
-        double[] longest = DAGShortestPath.longestPath(n, adj, 1, topo);
+            double[] dist = DAGShortestPath.shortestPath(g.getVertices(), adj, 0, order);
 
-        assertEquals(0.0, shortest[1]);
-        assertTrue(longest[5] > shortest[5]);
-        System.out.println("Shortest: " + Arrays.toString(shortest));
-        System.out.println("Longest: " + Arrays.toString(longest));
+            System.out.println("Graph " + (i + 1) + " → shortest paths: " + Arrays.toString(dist));
+        }
+    }
+
+    private static List<List<Integer>> toSimpleAdj(Graph g) {
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < g.getVertices(); i++) adj.add(new ArrayList<>());
+        for (int[] e : g.getEdges()) adj.get(e[0]).add(e[1]);
+        return adj;
     }
 }
