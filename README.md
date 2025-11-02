@@ -93,6 +93,8 @@ Graph 3 → [3, 6, 10, 13, 15, 4, 7, 11, 14, 16, 5, 8, 12, 17, 9]
 | large-3 | 40 | 24 | 0 | 70 | 1.1 | 68 |
 
 ---
+<img width="690" height="390" alt="image" src="https://github.com/user-attachments/assets/fc23ebc0-aca8-4584-8602-04132284e05c" />
+<img width="690" height="390" alt="image" src="https://github.com/user-attachments/assets/9e57fef4-bf8f-411d-9487-3025e15b9bf6" />
 
 ## 5. Algorithmic Analysis
 
