@@ -1,6 +1,6 @@
-package graph;
+package graph.algorithms;
 
-import graph.dagsp.DAGShortestPath;
+import graph.algorithms.dagsp.DAGShortestPath;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;

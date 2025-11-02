@@ -1,4 +1,4 @@
-package graph.core;
+package graph.algorithms.core;
 
 import com.google.gson.JsonObject;
 import java.util.*;

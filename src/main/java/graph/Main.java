@@ -1,6 +1,6 @@
 package graph;
 
-import graph.util.JsonLoader;
+import graph.algorithms.util.JsonLoader;
 import com.google.gson.JsonObject;
 
 public class Main {

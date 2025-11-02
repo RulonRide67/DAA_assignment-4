@@ -1,7 +1,7 @@
 package graph.algorithms;
 
-import graph.core.Graph;
-import graph.util.JsonLoader;
+import graph.algorithms.core.Graph;
+import graph.algorithms.util.JsonLoader;
 import org.junit.jupiter.api.Test;
 import java.nio.file.Path;
 

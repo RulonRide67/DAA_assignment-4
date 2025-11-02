@@ -1,6 +1,6 @@
-package graph;
+package graph.algorithms;
 
-import graph.scc.TarjanSCC;
+import graph.algorithms.scc.TarjanSCC;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;

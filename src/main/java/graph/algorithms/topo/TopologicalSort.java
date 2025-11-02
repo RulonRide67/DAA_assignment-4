@@ -1,4 +1,4 @@
-package graph.topo;
+package graph.algorithms.topo;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package graph.dagsp;
+package graph.algorithms.dagsp;
 
 import java.util.*;
 

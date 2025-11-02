@@ -1,7 +1,8 @@
-package graph;
+package graph.algorithms;
 
-import graph.topo.*;
-import graph.scc.TarjanSCC;
+import graph.algorithms.topo.CondensationGraph;
+import graph.algorithms.topo.TopologicalSort;
+import graph.algorithms.scc.TarjanSCC;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;

@@ -1,4 +1,4 @@
-package graph.metrics;
+package graph.algorithms.metrics;
 
 import java.util.HashMap;
 import java.util.Map;

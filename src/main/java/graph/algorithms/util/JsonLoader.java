@@ -1,8 +1,8 @@
-package graph.util;
+package graph.algorithms.util;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import graph.core.Graph;
+import graph.algorithms.core.Graph;
 
 import java.nio.file.*;
 

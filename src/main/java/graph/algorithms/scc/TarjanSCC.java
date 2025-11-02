@@ -1,4 +1,4 @@
-package graph.scc;
+package graph.algorithms.scc;
 
 import java.util.*;
 
